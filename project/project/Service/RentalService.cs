@@ -60,4 +60,8 @@ public class RentalService
     }
     
     public List<Hardware> GetAllHardware() => _allHardware;
+    public List<Hardware> GetAvailableHardware() => 
+        _allHardware.Where(h => h.IsAvailable && !h.IsInService).ToList();
+    public List<Rental> GetOverdueRentals() => 
+        _allRentals.Where(r => r.ActualReturnDate == null && DateTime.Now > r.DueDate).ToList();
 }
