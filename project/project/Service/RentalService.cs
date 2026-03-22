@@ -41,6 +41,23 @@ public class RentalService
 
         return $"Sukces: Wypożyczono {item.Name} użytkownikowi {user.FirstName}.";
     }
+    public string ReturnEquipment(string hardwareId)
+    {
+        var rental = _allRentals.Find(r => r.Equipment.Id == hardwareId && r.ActualReturnDate == null);
+        
+        if (rental == null) return "Błąd: Nie znaleziono aktywnego wypożyczenia dla tego sprzętu.";
+
+        rental.ActualReturnDate = DateTime.Now;
+        rental.Equipment.IsAvailable = true; 
+        
+        if (rental.ActualReturnDate > rental.DueDate)
+        {
+            var delay = (rental.ActualReturnDate.Value - rental.DueDate).Days;
+            decimal penalty = delay * 10; 
+            return $"Zwrot wykonany z opóźnieniem ({delay} dni). Kara: {penalty} PLN.";
+        }
+        return "Zwrot wykonany w terminie. Brak kary.";
+    }
     
     public List<Hardware> GetAllHardware() => _allHardware;
 }
