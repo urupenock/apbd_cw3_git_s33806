@@ -1,4 +1,9 @@
-Struktura projektu
+Instrukcja uruchomienia
+1. Sklonować repozytorium: "git clone [LINK_DO_REPO]"
+2. Otworzyć projekt w środowisku IDE
+3. Skompilować i uruchomić projekt
+4. Program automatycznie wykona demonstrację w konsoli.
+ Struktura projektu
 -Models (Folder Models): Tutaj znajdują się same szkielety danych.
 -Użyłam klas abstrakcyjnych (Hardware, User), ponieważ nie ma sensu tworzyć "czystego" sprzętu – zawsze musi to być konkretny model.
 -Dziedziczenie zastosowałam tam, gdzie wynika to z logiki biznesowej (np. Student i Pracownik to Użytkownicy, ale mają inne limity).
